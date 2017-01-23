@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BI Demo UI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Below 2 scripts added in for API access: -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="http://jpillora.com/jquery.rest/dist/1/jquery.rest.min.js"></script>
+
+<!-- Style for the DIV that businesses are displayd in -->
+  <style>
+.products {
+font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+font-size: 14px;
+font-style: normal;
+font-variant: normal;
+font-weight: 400;
+line-height: 20px;
+margin-left: 10%;
+margin-right: 10%;
+line-height: 200%;
+}
+  </style>
+
+  <script>
+  function match_business() {
+    var string = "http://localhost:9000/v1/search?query=BusinessName=";
+    var string2 = document.getElementById('businessName').value.toString();
+    var query = string.concat(string2);
+    console.log(query)
+    send_request(query)
+  }
+
+  function send_request(query){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", query, false ); // false for synchronous request
+    xmlHttp.send( null );
+    console.log("start")
+    console.log(xmlHttp.responseText)
+    console.log("end")
+
+    // ALL of below should be in a seperate function
+    var jsonResponse = JSON.parse(xmlHttp.responseText);
+
+    var arr = [];
+    for(var x in jsonResponse){
+      arr.push(jsonResponse[x]);
+    }
+
+    // var to_add = ""
+    // for (i = 0; i < arr.length; i++) {
+    //   business_div = "<div>" +
+  	// 				 "<h3>" + arr[i].businessName + "</h3>" +
+  	// 				 "<p>" + "UPRN: " + arr[i].uprn + "</p>" +
+  	// 				 "<p>&pound;" + "Industry Code: " + arr[i].industryCode +"</p>" +
+  	// 				 "<br>" +
+  	// 				 "</div>";
+    //   to_add += business_div
+    // }
+    // document.getElementById('prod').innerHTML =  to_add;
+
+
+    var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
+
+    var headers = "<th>ID</th>\
+            <th>Business Name</th>\
+            <th>UPRN</th>\
+            <th>Industry Code</th>\
+            <th>Legal Status</th>\
+            <th>Trading Status</th>\
+            <th>Turnover</th>\
+            <th>Employment Bands</th>\
+          </tr>\
+        </thead>\
+        <tbody>";
+
+    var end = "</tbody></table></div>";
+
+    var to_add = ""
+    for (i = 0; i < arr.length; i++) {
+      business_div = "<tr>" +
+  					 "<td>" + arr[i].id + "</td>" +
+  					 "<td>" + arr[i].businessName + "</td>" +
+             "<td>" + arr[i].uprn + "</td>" +
+             "<td>" + arr[i].industryCode + "</td>" +
+             "<td>" + arr[i].legalStatus + "</td>" +
+             "<td>" + arr[i].tradingStatus + "</td>" +
+             "<td>" + arr[i].turnover + "</td>" +
+             "<td>" + arr[i].employmentBands + "</td>" +
+             "</tr>";
+      to_add += business_div
+    }
+    var new_div = start + headers + to_add + end;
+    document.getElementById('prod').innerHTML =  new_div;
+  }
+
+  function backup_working_request() {
+    var xmlHttp = new XMLHttpRequest();
+    //var string = "http://localhost:9000/v1/search?query=BusinessName=" + document.getElementById('businessName').value
+    //console.log(string)
+    xmlHttp.open( "GET", "http://localhost:9000/v1/search?query=BusinessName=test", false ); // false for synchronous request
+    xmlHttp.send( null );
+    console.log("start")
+    console.log(xmlHttp.responseText)
+    console.log("end")
+  }
+  </script>
+
+</head>
+<body>
+
+<div class="container">
+  <!--
+  <h2>Dynamic Pills</h2>
+  <p>To make the tabs toggleable, add the data-toggle="pill" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+-->
+<br>
+<h1>Business Index Demo UI</h1>
+<br>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+    <li><a data-toggle="pill" href="#menu1">Match</a></li>
+    <li><a data-toggle="pill" href="#menu2">Range Match</a></li>
+    <li><a data-toggle="pill" href="#menu3">Feedback</a></li>
+    <li><a data-toggle="pill" href="#menu4">Bulk Match</a></li>
+    <li><a data-toggle="pill" href="#menu5">UBRN Lookup</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Home</h3>
+      <p>Welcome to the Business Index Demo UI!</p>
+      <br>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Match</h3>
+      <br>
+      <form>
+        Business Name:
+        <input type="text" id="businessName" name="businessName"><br><br>
+        Turnover:
+        <input type="text" id="turnover" name="turnover"><br><br>
+        Number of Employees:
+        <input type="text" id="employees" name="employees"><br><br>
+      </form>
+      <br>
+      <input id="clickMe" type="button" value="Search" onclick="match_business();" />
+      <div class="products" id="prod"></div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Range Match</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Feedback</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <h3>Bulk Match</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+    <div id="menu5" class="tab-pane fade">
+      <h3>UBRN Lookup</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
