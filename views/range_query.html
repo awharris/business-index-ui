@@ -65,16 +65,99 @@
 
     <div class="container-fluid">
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
-          <h1 class="page-header">Range Query</h1>
-          <form>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
+        <h1 class="page-header">Match</h1>
+        <form>
+        <div class="btn-group">
+          <label for="employmentbandlabel">&nbsp;&nbsp;&nbsp;&nbsp;Employement Band&nbsp;</label>
+          <select class="form-control" id="employmentband">
+            <option></option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+          </select>
+
+          <label for="legalStatuslabel">&nbsp;&nbsp;&nbsp;&nbsp;Legal Status&nbsp;</label>
+          <select class="form-control" id="legalStatus">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+          </select>
+
+          <label for="turnoverlabel">&nbsp;&nbsp;&nbsp;&nbsp;Turnover&nbsp;</label>
+          <select class="form-control" id="turnover">
+            <option></option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+          </select>
+
+            <label for="tradingstatuslabel">&nbsp;&nbsp;&nbsp;&nbsp;Trading Status &nbsp;</label>
+            <select class="form-control" id="tradingstatus">
+              <option></option>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+            </select>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
 
 
+          </div>
 
-            <div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-          </form>
+          <!-- <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
+            </label>
+            <label class="btn btn-primary">
+              <input type="checkbox" autocomplete="off"> Checkbox 2
+            </label>
+            <label class="btn btn-primary">
+              <input type="checkbox" autocomplete="off"> Checkbox 3
+            </label>
+          </div> -->
+
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary btn-lg active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> Table
+            </label>
+            <label class="btn btn-primary btn-lg">
+              <input type="radio" name="options" id="option2" autocomplete="off"> List
+            </label>
+            <!-- <label class="btn btn-primary">
+              <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+            </label> -->
+          </div>
+        </form>
 
 
         </div>
