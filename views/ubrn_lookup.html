@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -76,10 +77,13 @@
 
             <div>
               <button type="submit" class="btn btn-primary">Submit</button>
+              <input id="clickMe" type="button" value="Search" onclick="match_business();" />
             </div>
           </form>
 
+          <div class="products" id="prod"></div>
 
+<!--
           </div>
             <h3 class="sub-header">Results</h2>
             <div class="table-responsive">
@@ -221,7 +225,7 @@
           </div>
         </div>
       </div>
-
+-->
 
       </div>
     </div>
@@ -235,5 +239,7 @@
     <script src="../js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../js/accessAPI.js"></script>
+
   </body>
 </html>
