@@ -1,7 +1,10 @@
 function match_business() {
-  var string = "http://localhost:9000/v1/search?query=BusinessName=";
-  var string2 = document.getElementById('businessName').value.toString();
-  var query = string.concat(string2);
+  var string = "http://localhost:9000/v1/search?query=UPRN:\"";
+  var string2 = document.getElementById('ubrnentry').value.toString();
+  var string3 = string.concat(string2);
+  var stringEnd = "\""
+  var query = string3.concat(stringEnd);
+
   console.log(query)
   send_request(query)
 }
