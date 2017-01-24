@@ -12,9 +12,10 @@ function range_query(){
   var employment_band = document.getElementById('employmentband').value.toString();
   var legal_status = document.getElementById('legalStatus').value.toString();
   var turnover = document.getElementById('turnover').value.toString();
+  var trading_status = document.getElementById('tradingstatus').value.toString();
   //var query = "";
   var arr = [];
-  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover]];
+  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status]];
   for(var x in values){
     if (values[x][1] != ""){
       arr.push(values[x][0]);
