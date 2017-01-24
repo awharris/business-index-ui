@@ -14,11 +14,10 @@ function range_query(){
   var turnover = document.getElementById('turnover').value.toString();
   //var query = "";
   var arr = [];
-  var values = [["EmploymentBands",employment_band],["LegalStatus",legal_status],["Turnover",turnover]];
+  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover]];
   for(var x in values){
     if (values[x][1] != ""){
       arr.push(values[x][0]);
-      arr.push(":");
       arr.push(values[x][1]);
       arr.push(" AND ");
     }
