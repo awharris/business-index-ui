@@ -8,6 +8,79 @@
 //   send_request(query)
 // }
 
+function results_format(results){
+  //console.log(results)
+
+
+  var table_checked = document.getElementById("radio1").checked;
+  var list_checked = document.getElementById("radio2").checked;
+  var json_checked = document.getElementById("radio3").checked;
+
+
+  //console.log(checked)
+
+
+
+  //var rates = document.getElementByName('radio-group').value.toString();
+  //console.log(rates)
+
+
+  if (table_checked){
+    // Need to show table div
+    var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
+
+    var headers = "<th>ID</th>\
+            <th>Business Name</th>\
+            <th>UPRN</th>\
+            <th>Industry Code</th>\
+            <th>Legal Status</th>\
+            <th>Trading Status</th>\
+            <th>Turnover</th>\
+            <th>Employment Bands</th>\
+          </tr>\
+        </thead>\
+        <tbody>";
+
+    var end = "</tbody></table></div>";
+
+    var to_add = ""
+    for (i = 0; i < results.length; i++) {
+      business_div = "<tr>" +
+             "<td>" + results[i].id + "</td>" +
+             "<td>" + results[i].businessName + "</td>" +
+             "<td>" + results[i].uprn + "</td>" +
+             "<td>" + results[i].industryCode + "</td>" +
+             "<td>" + results[i].legalStatus + "</td>" +
+             "<td>" + results[i].tradingStatus + "</td>" +
+             "<td>" + results[i].turnover + "</td>" +
+             "<td>" + results[i].employmentBands + "</td>" +
+             "</tr>";
+      to_add += business_div
+    }
+    var new_div = start + headers + to_add + end;
+  }
+
+  if (list_checked){
+    var to_add = ""
+    for (i = 0; i < results.length; i++) {
+      business_div = "<div>" +
+    				 "<h3>" + results[i].businessName + "</h3>" +
+    				 "<p>" + "ID: " + results[i].id + "</p>" +
+    				 "<p>" + "UPRN: " + results[i].industryCode +"</p>" +
+    				 "<br>" +
+    				 "</div>";
+      to_add += business_div
+    }
+    var new_div = to_add
+  }
+
+  if (json_checked){
+    // Need to show raw json
+    console.log("Showing raw json")
+  }
+  document.getElementById('prod').innerHTML =  new_div;
+}
+
 function range_query(){
   var business_name = document.getElementById('BusinessName').value.toString();
   var industry_code = document.getElementById('IndustryCode').value.toString();
@@ -56,51 +129,55 @@ function send_request(query){
     arr.push(jsonResponse[x]);
   }
 
+  results_format(arr)
+
+
+
+  // // var to_add = ""
+  // // for (i = 0; i < arr.length; i++) {
+  // //   business_div = "<div>" +
+  // // 				 "<h3>" + arr[i].businessName + "</h3>" +
+  // // 				 "<p>" + "UPRN: " + arr[i].uprn + "</p>" +
+  // // 				 "<p>&pound;" + "Industry Code: " + arr[i].industryCode +"</p>" +
+  // // 				 "<br>" +
+  // // 				 "</div>";
+  // //   to_add += business_div
+  // // }
+  // // document.getElementById('prod').innerHTML =  to_add;
+  //
+  //
+  // var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
+  //
+  // var headers = "<th>ID</th>\
+  //         <th>Business Name</th>\
+  //         <th>UPRN</th>\
+  //         <th>Industry Code</th>\
+  //         <th>Legal Status</th>\
+  //         <th>Trading Status</th>\
+  //         <th>Turnover</th>\
+  //         <th>Employment Bands</th>\
+  //       </tr>\
+  //     </thead>\
+  //     <tbody>";
+  //
+  // var end = "</tbody></table></div>";
+  //
   // var to_add = ""
   // for (i = 0; i < arr.length; i++) {
-  //   business_div = "<div>" +
-  // 				 "<h3>" + arr[i].businessName + "</h3>" +
-  // 				 "<p>" + "UPRN: " + arr[i].uprn + "</p>" +
-  // 				 "<p>&pound;" + "Industry Code: " + arr[i].industryCode +"</p>" +
-  // 				 "<br>" +
-  // 				 "</div>";
+  //   business_div = "<tr>" +
+  //          "<td>" + arr[i].id + "</td>" +
+  //          "<td>" + arr[i].businessName + "</td>" +
+  //          "<td>" + arr[i].uprn + "</td>" +
+  //          "<td>" + arr[i].industryCode + "</td>" +
+  //          "<td>" + arr[i].legalStatus + "</td>" +
+  //          "<td>" + arr[i].tradingStatus + "</td>" +
+  //          "<td>" + arr[i].turnover + "</td>" +
+  //          "<td>" + arr[i].employmentBands + "</td>" +
+  //          "</tr>";
   //   to_add += business_div
   // }
-  // document.getElementById('prod').innerHTML =  to_add;
-
-
-  var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
-
-  var headers = "<th>ID</th>\
-          <th>Business Name</th>\
-          <th>UPRN</th>\
-          <th>Industry Code</th>\
-          <th>Legal Status</th>\
-          <th>Trading Status</th>\
-          <th>Turnover</th>\
-          <th>Employment Bands</th>\
-        </tr>\
-      </thead>\
-      <tbody>";
-
-  var end = "</tbody></table></div>";
-
-  var to_add = ""
-  for (i = 0; i < arr.length; i++) {
-    business_div = "<tr>" +
-           "<td>" + arr[i].id + "</td>" +
-           "<td>" + arr[i].businessName + "</td>" +
-           "<td>" + arr[i].uprn + "</td>" +
-           "<td>" + arr[i].industryCode + "</td>" +
-           "<td>" + arr[i].legalStatus + "</td>" +
-           "<td>" + arr[i].tradingStatus + "</td>" +
-           "<td>" + arr[i].turnover + "</td>" +
-           "<td>" + arr[i].employmentBands + "</td>" +
-           "</tr>";
-    to_add += business_div
-  }
-  var new_div = start + headers + to_add + end;
-  document.getElementById('prod').innerHTML =  new_div;
+  // var new_div = start + headers + to_add + end;
+  // document.getElementById('prod').innerHTML =  new_div;
 }
 
 function backup_working_request() {
