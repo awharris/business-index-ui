@@ -8,7 +8,7 @@
 //   send_request(query)
 // }
 
-function results_format(results){
+function results_format(jsonResponse,xml){
   //console.log(results)
 
 
@@ -26,6 +26,10 @@ function results_format(results){
 
 
   if (table_checked){
+    var arr = [];
+    for(var x in jsonResponse){
+      arr.push(jsonResponse[x]);
+    }
     // Need to show table div
     var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
 
@@ -44,16 +48,16 @@ function results_format(results){
     var end = "</tbody></table></div>";
 
     var to_add = ""
-    for (i = 0; i < results.length; i++) {
+    for (i = 0; i < arr.length; i++) {
       business_div = "<tr>" +
-             "<td>" + results[i].id + "</td>" +
-             "<td>" + results[i].businessName + "</td>" +
-             "<td>" + results[i].uprn + "</td>" +
-             "<td>" + results[i].industryCode + "</td>" +
-             "<td>" + results[i].legalStatus + "</td>" +
-             "<td>" + results[i].tradingStatus + "</td>" +
-             "<td>" + results[i].turnover + "</td>" +
-             "<td>" + results[i].employmentBands + "</td>" +
+             "<td>" + arr[i].id + "</td>" +
+             "<td>" + arr[i].businessName + "</td>" +
+             "<td>" + arr[i].uprn + "</td>" +
+             "<td>" + arr[i].industryCode + "</td>" +
+             "<td>" + arr[i].legalStatus + "</td>" +
+             "<td>" + arr[i].tradingStatus + "</td>" +
+             "<td>" + arr[i].turnover + "</td>" +
+             "<td>" + arr[i].employmentBands + "</td>" +
              "</tr>";
       to_add += business_div
     }
@@ -61,12 +65,20 @@ function results_format(results){
   }
 
   if (list_checked){
+    var arr = [];
+    for(var x in jsonResponse){
+      arr.push(jsonResponse[x]);
+    }
     var to_add = ""
-    for (i = 0; i < results.length; i++) {
+    for (i = 0; i < arr.length; i++) {
       business_div = "<div>" +
-    				 "<h3>" + results[i].businessName + "</h3>" +
-    				 "<p>" + "ID: " + results[i].id + "</p>" +
-    				 "<p>" + "UPRN: " + results[i].industryCode +"</p>" +
+    				 "<h3>" + arr[i].businessName + "</h3>" +
+    				 "<p>" + "ID: " + arr[i].id + "</p>" +
+    				 "<p>" + "UPRN: " + arr[i].industryCode +"</p>" +
+             "<p>" + "Legal Status: " + arr[i].legalStatus +"</p>" +
+             "<p>" + "Trading Status: " + arr[i].tradingStatus +"</p>" +
+             "<p>" + "Turnover: " + arr[i].turnover +"</p>" +
+             "<p>" + "Employment Bands: " + arr[i].employmentBands +"</p>" +
     				 "<br>" +
     				 "</div>";
       to_add += business_div
@@ -77,8 +89,40 @@ function results_format(results){
   if (json_checked){
     // Need to show raw json
     console.log("Showing raw json")
+
+    var test = syntaxHighlight(jsonResponse)
+
+    var str = JSON.stringify(jsonResponse, null, 2); // spacing level = 2
+    console.log(str)
+    var start = test;
+
+    console.log(start)
+    var new_div = syntaxHighlight(jsonResponse);
   }
   document.getElementById('prod').innerHTML =  new_div;
+}
+
+function syntaxHighlight(json) {
+  // http://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
 }
 
 function range_query(){
@@ -121,15 +165,12 @@ function send_request(query){
   console.log(xmlHttp.responseText)
   console.log("end")
 
+  var xml = xmlHttp.responseText;
+
   // ALL of below should be in a seperate function
   var jsonResponse = JSON.parse(xmlHttp.responseText);
 
-  var arr = [];
-  for(var x in jsonResponse){
-    arr.push(jsonResponse[x]);
-  }
-
-  results_format(arr)
+  results_format(jsonResponse,xml)
 
 
 
