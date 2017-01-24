@@ -9,10 +9,9 @@ function match_business() {
 }
 
 function ubrn_lookup(){
-  var search_string = "UPRN\""
+  var search_string = "UPRN:"
   var ubrn = document.getElementById('ubrnentry').value.toString();
-  var end = "\"";
-  var query = search_string.concat(ubrn).concat(end)
+  var query = search_string.concat(ubrn)
   send_request(query)
 }
 
