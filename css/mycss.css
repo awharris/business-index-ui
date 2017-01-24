@@ -6,3 +6,50 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+
+
+/* 
+.input-mini { 
+width: 60px; 
+} 
+
+.input-small { 
+width: 90px; 
+} 
+
+.input-medium { 
+width: 150px; 
+} 
+ */
+
+.input-large {
+height: 200px;  
+width: 210px;
+display: block ;
+margin-bottom:30px;
+} 
+
+
+.input-xlarge { 
+width: 270px;
+display: block ;
+margin-bottom:30px; 
+} 
+
+.input-xlargeinrow { 
+width: 270px;
+margin-bottom:30px;
+margin-right: 90px 
+} 
+
+
+.label-input-xlargeinrow{
+margin-bottom: 20px;
+}
+/* 
+.input-xxlarge { 
+width: 530px; 
+}
+ */
+
