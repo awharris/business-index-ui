@@ -1,12 +1,12 @@
-function match_business() {
-  var string = "http://localhost:9000/v1/search?query=UPRN:\"";
-  var string2 = document.getElementById('ubrnentry').value.toString();
-  var string3 = string.concat(string2);
-  var stringEnd = "\""
-  var query = string3.concat(stringEnd);
-  console.log(query)
-  send_request(query)
-}
+// function match_business() {
+//   var string = "http://localhost:9000/v1/search?query=UPRN:\"";
+//   var string2 = document.getElementById('ubrnentry').value.toString();
+//   var string3 = string.concat(string2);
+//   var stringEnd = "\""
+//   var query = string3.concat(stringEnd);
+//   console.log(query)
+//   send_request(query)
+// }
 
 function range_query(){
   var business_name = document.getElementById('BusinessName').value.toString();
@@ -15,7 +15,6 @@ function range_query(){
   var legal_status = document.getElementById('legalStatus').value.toString();
   var turnover = document.getElementById('turnover').value.toString();
   var trading_status = document.getElementById('tradingstatus').value.toString();
-  //var query = "";
   var arr = [];
   var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
   for(var x in values){
@@ -44,6 +43,7 @@ function send_request(query){
   var search = "http://localhost:9000/v1/search?query=";
   xmlHttp.open( "GET", search.concat(query), false ); // false for synchronous request
   xmlHttp.send( null );
+  console.log(search.concat(query))
   console.log("start")
   console.log(xmlHttp.responseText)
   console.log("end")
