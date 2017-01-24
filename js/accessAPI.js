@@ -4,14 +4,22 @@ function match_business() {
   var string3 = string.concat(string2);
   var stringEnd = "\""
   var query = string3.concat(stringEnd);
-
   console.log(query)
+  send_request(query)
+}
+
+function ubrn_lookup(){
+  var search_string = "UPRN\""
+  var ubrn = document.getElementById('ubrnentry').value.toString();
+  var end = "\"";
+  var query = search_string.concat(ubrn).concat(end)
   send_request(query)
 }
 
 function send_request(query){
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", query, false ); // false for synchronous request
+  var search = "http://localhost:9000/v1/search?query=";
+  xmlHttp.open( "GET", search.concat(query), false ); // false for synchronous request
   xmlHttp.send( null );
   console.log("start")
   console.log(xmlHttp.responseText)
