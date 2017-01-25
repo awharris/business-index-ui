@@ -126,8 +126,8 @@ function results_format(jsonResponse,xml){
         }
         return rtnStr;
     });
-    console.log(regeStr)
-    new_div =  regeStr;
+    //console.log(regeStr)
+    new_div = regeStr;
 
   }
   document.getElementById('prod').innerHTML =  new_div;
@@ -192,9 +192,9 @@ function send_request(query){
   xmlHttp.open( "GET", search.concat(query), false ); // false for synchronous request
   xmlHttp.send( null );
   console.log(search.concat(query))
-  console.log("start")
-  console.log(xmlHttp.responseText)
-  console.log("end")
+  //console.log("start")
+  //console.log(xmlHttp.responseText)
+  //console.log("end")
 
   var xml = xmlHttp.responseText;
 
