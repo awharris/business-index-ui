@@ -7,18 +7,22 @@ body {
   margin-bottom: 20px;
 }
 
-
-
-.input-xlarge { 
+.input-xlarge {
 width: 270px;
 display: block ;
-margin-bottom:30px; 
-} 
+margin-bottom:30px;
+}
 
-.input-xlargeinrow { 
+.input-xlargeinrow {
 width: 270px;
 margin-bottom:30px;
-margin-right: 90px 
-} 
+margin-right: 90px
+}
 
-
+/* Below is for the json highlighting */
+ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+ .string { color: green; }
+ .number { color: darkorange; }
+ .boolean { color: blue; }
+ .null { color: magenta; }
+ .key { color: red; }
