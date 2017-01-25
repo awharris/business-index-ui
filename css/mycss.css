@@ -26,3 +26,10 @@ margin-right: 90px
  .boolean { color: blue; }
  .null { color: magenta; }
  .key { color: red; }
+ 
+ #jsonStr, #regeStr {
+  border: 2px dashed #666;
+  margin: 20px;
+  padding: 10px;
+  font-family: "Arial";
+}

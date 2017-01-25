@@ -87,17 +87,48 @@ function results_format(jsonResponse,xml){
   }
 
   if (json_checked){
+    // http://jsfiddle.net/f24UP/2/
+    // source: http://stackoverflow.com/questions/14195530/how-to-display-raw-json-data-on-a-html-page
+
     // Need to show raw json
-    console.log("Showing raw json")
+    // console.log("Showing raw json")
+    // var test = syntaxHighlight(jsonResponse)
+    // var str = JSON.stringify(jsonResponse, null, 2); // spacing level = 2
+    // console.log(str)
+    // var start = test;
+    // console.log(start)
+    // var new_div = syntaxHighlight(jsonResponse);
 
-    var test = syntaxHighlight(jsonResponse)
+    var jsonVar = {
+       jsonResponse
+    },
+    jsonStr = JSON.stringify(jsonVar),
+    regeStr = '',
+    f = {
+            brace: 0
+        }; // for tracking matches, in particular the curly braces
 
-    var str = JSON.stringify(jsonResponse, null, 2); // spacing level = 2
-    console.log(str)
-    var start = test;
+    document.getElementById('prod').innerHTML = jsonStr;
 
-    console.log(start)
-    var new_div = syntaxHighlight(jsonResponse);
+    regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
+        var rtnFn = function() {
+                return '<div style="text-indent: ' + (f['brace'] * 20) + 'px;">' + p1 + '</div>';
+            },
+            rtnStr = 0;
+        if (p1.lastIndexOf('{') === (p1.length - 1)) {
+            rtnStr = rtnFn();
+            f['brace'] += 1;
+        } else if (p1.indexOf('}') === 0) {
+            f['brace'] -= 1;
+            rtnStr = rtnFn();
+        } else {
+            rtnStr = rtnFn();
+        }
+        return rtnStr;
+    });
+    console.log(regeStr)
+    new_div =  regeStr;
+
   }
   document.getElementById('prod').innerHTML =  new_div;
 }
