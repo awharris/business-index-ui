@@ -159,15 +159,22 @@ function syntaxHighlight(json) {
 function range_query(){
   var business_name = document.getElementById('BusinessName').value.toString();
   var industry_code = document.getElementById('IndustryCode').value.toString();
+  var industry_code2 = document.getElementById('IndustryCode2').value.toString();
   var employment_band = document.getElementById('employmentband').value.toString();
   var legal_status = document.getElementById('legalStatus').value.toString();
   var legal_status2 = document.getElementById('legalStatus2').value.toString();
   var turnover = document.getElementById('turnover').value.toString();
   var trading_status = document.getElementById('tradingstatus').value.toString();
   var arr = [];
-  var values = [["EmploymentBands:",employment_band],["LegalStatus:[",legal_status+" TO "+legal_status2+"]"],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
+  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
     for(var x in values){
-    if (values[x][1] != ""){
+    if (values[x][1] != "" | " TO ]"){
+      if (values[x][0] == "LegalStatus:"){
+        values[x][1] = "["+legal_status+" TO "+legal_status2+"]";
+      }
+      if (values[x][0] == "IndustryCode:"){
+        values[x][1] = "["+industry_code+" TO "+industry_code2+"]";
+      }
       arr.push(values[x][0]);
       arr.push(values[x][1]);
       arr.push(" AND ");
@@ -251,6 +258,20 @@ function send_request(query){
   // }
   // var new_div = start + headers + to_add + end;
   // document.getElementById('prod').innerHTML =  new_div;
+
+
+  // var xhr = new XMLHttpRequest();
+  // xhr.open('GET','http://localhost:9000/v1/search?query=UPRN:734090080368',true);
+  //
+  // //xhr.open('GET','https://www.google.com/images/errors/robot.png',true);
+  //
+  // xhr.overrideMimeType('text/plain; charset=x-user-defined');
+  // xhr.onreadystatechange=function(e){
+  //     if(xhr.readyState==4&&xhr.status==200){
+  //         console.log(xhr.response.length);
+  //     }
+  // };
+  // xhr.send();
 }
 
 function backup_working_request() {
