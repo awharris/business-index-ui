@@ -161,11 +161,12 @@ function range_query(){
   var industry_code = document.getElementById('IndustryCode').value.toString();
   var employment_band = document.getElementById('employmentband').value.toString();
   var legal_status = document.getElementById('legalStatus').value.toString();
+  var legal_status2 = document.getElementById('legalStatus2').value.toString();
   var turnover = document.getElementById('turnover').value.toString();
   var trading_status = document.getElementById('tradingstatus').value.toString();
   var arr = [];
-  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
-  for(var x in values){
+  var values = [["EmploymentBands:",employment_band],["LegalStatus:[",legal_status+" TO "+legal_status2+"]"],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
+    for(var x in values){
     if (values[x][1] != ""){
       arr.push(values[x][0]);
       arr.push(values[x][1]);
