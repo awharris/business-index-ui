@@ -1,35 +1,14 @@
-// function match_business() {
-//   var string = "http://localhost:9000/v1/search?query=UPRN:\"";
-//   var string2 = document.getElementById('ubrnentry').value.toString();
-//   var string3 = string.concat(string2);
-//   var stringEnd = "\""
-//   var query = string3.concat(stringEnd);
-//   console.log(query)
-//   send_request(query)
-// }
-
 function results_format(jsonResponse,xml,search_query){
-  //console.log(results)
-
-
   var table_checked = document.getElementById("radio1").checked;
   var list_checked = document.getElementById("radio2").checked;
   var json_checked = document.getElementById("radio3").checked;
-
-
-  //console.log(checked)
-
-
-
-  //var rates = document.getElementByName('radio-group').value.toString();
-  //console.log(rates)
-
 
   if (table_checked){
     var arr = [];
     for(var x in jsonResponse){
       arr.push(jsonResponse[x]);
     }
+
     // Need to show table div
     var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
 
@@ -90,15 +69,6 @@ function results_format(jsonResponse,xml,search_query){
     // http://jsfiddle.net/f24UP/2/
     // source: http://stackoverflow.com/questions/14195530/how-to-display-raw-json-data-on-a-html-page
 
-    // Need to show raw json
-    // console.log("Showing raw json")
-    // var test = syntaxHighlight(jsonResponse)
-    // var str = JSON.stringify(jsonResponse, null, 2); // spacing level = 2
-    // console.log(str)
-    // var start = test;
-    // console.log(start)
-    // var new_div = syntaxHighlight(jsonResponse);
-
     var jsonVar = {
        jsonResponse
     },
@@ -126,10 +96,10 @@ function results_format(jsonResponse,xml,search_query){
         }
         return rtnStr;
     });
-    //console.log(regeStr)
     new_div = regeStr;
 
   }
+  // Replace the divs with the query results and the actual query
   document.getElementById('prod').innerHTML =  new_div;
   document.getElementById('query').innerHTML = search_query;
 }
@@ -199,12 +169,9 @@ function send_request(query){
   var xmlHttp = new XMLHttpRequest();
   var search = "http://localhost:9000/v1/search?query=";
   var search_query = search.concat(query)
-  xmlHttp.open( "GET", search.concat(query), false ); // false for synchronous request
+  xmlHttp.open( "GET", search_query, false ); // false for synchronous request
   xmlHttp.send( null );
   console.log(search.concat(query))
-  //console.log("start")
-  //console.log(xmlHttp.responseText)
-  //console.log("end")
 
   var xml = xmlHttp.responseText;
 
@@ -212,55 +179,6 @@ function send_request(query){
   var jsonResponse = JSON.parse(xmlHttp.responseText);
 
   results_format(jsonResponse,xml,search_query)
-
-
-
-  // // var to_add = ""
-  // // for (i = 0; i < arr.length; i++) {
-  // //   business_div = "<div>" +
-  // // 				 "<h3>" + arr[i].businessName + "</h3>" +
-  // // 				 "<p>" + "UPRN: " + arr[i].uprn + "</p>" +
-  // // 				 "<p>&pound;" + "Industry Code: " + arr[i].industryCode +"</p>" +
-  // // 				 "<br>" +
-  // // 				 "</div>";
-  // //   to_add += business_div
-  // // }
-  // // document.getElementById('prod').innerHTML =  to_add;
-  //
-  //
-  // var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
-  //
-  // var headers = "<th>ID</th>\
-  //         <th>Business Name</th>\
-  //         <th>UPRN</th>\
-  //         <th>Industry Code</th>\
-  //         <th>Legal Status</th>\
-  //         <th>Trading Status</th>\
-  //         <th>Turnover</th>\
-  //         <th>Employment Bands</th>\
-  //       </tr>\
-  //     </thead>\
-  //     <tbody>";
-  //
-  // var end = "</tbody></table></div>";
-  //
-  // var to_add = ""
-  // for (i = 0; i < arr.length; i++) {
-  //   business_div = "<tr>" +
-  //          "<td>" + arr[i].id + "</td>" +
-  //          "<td>" + arr[i].businessName + "</td>" +
-  //          "<td>" + arr[i].uprn + "</td>" +
-  //          "<td>" + arr[i].industryCode + "</td>" +
-  //          "<td>" + arr[i].legalStatus + "</td>" +
-  //          "<td>" + arr[i].tradingStatus + "</td>" +
-  //          "<td>" + arr[i].turnover + "</td>" +
-  //          "<td>" + arr[i].employmentBands + "</td>" +
-  //          "</tr>";
-  //   to_add += business_div
-  // }
-  // var new_div = start + headers + to_add + end;
-  // document.getElementById('prod').innerHTML =  new_div;
-
 
   // var xhr = new XMLHttpRequest();
   // xhr.open('GET','http://localhost:9000/v1/search?query=UPRN:734090080368',true);
@@ -274,15 +192,4 @@ function send_request(query){
   //     }
   // };
   // xhr.send();
-}
-
-function backup_working_request() {
-  var xmlHttp = new XMLHttpRequest();
-  //var string = "http://localhost:9000/v1/search?query=BusinessName=" + document.getElementById('businessName').value
-  //console.log(string)
-  xmlHttp.open( "GET", "http://localhost:9000/v1/search?query=BusinessName=test", false ); // false for synchronous request
-  xmlHttp.send( null );
-  console.log("start")
-  console.log(xmlHttp.responseText)
-  console.log("end")
 }
