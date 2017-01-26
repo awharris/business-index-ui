@@ -8,7 +8,7 @@
 //   send_request(query)
 // }
 
-function results_format(jsonResponse,xml){
+function results_format(jsonResponse,xml,search_query){
   //console.log(results)
 
 
@@ -131,6 +131,7 @@ function results_format(jsonResponse,xml){
 
   }
   document.getElementById('prod').innerHTML =  new_div;
+  document.getElementById('query').innerHTML = search_query;
 }
 
 function syntaxHighlight(json) {
@@ -197,6 +198,7 @@ function ubrn_lookup(){
 function send_request(query){
   var xmlHttp = new XMLHttpRequest();
   var search = "http://localhost:9000/v1/search?query=";
+  var search_query = search.concat(query)
   xmlHttp.open( "GET", search.concat(query), false ); // false for synchronous request
   xmlHttp.send( null );
   console.log(search.concat(query))
@@ -209,7 +211,7 @@ function send_request(query){
   // ALL of below should be in a seperate function
   var jsonResponse = JSON.parse(xmlHttp.responseText);
 
-  results_format(jsonResponse,xml)
+  results_format(jsonResponse,xml,search_query)
 
 
 
