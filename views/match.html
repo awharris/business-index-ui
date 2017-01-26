@@ -70,21 +70,19 @@
           <form>
 
             <div class="form-group">
-              <label for="companynameentry">Business Name</label>
-              <input type="companyname" class="form-control" id="companynameentry" aria-describedby="companynameHelp" placeholder="Enter company name">
-              <small id="companynameHelp" class="form-text text-muted">An exisitng or previous</small>
+              <label for="BusinessName">Business Name</label>
+              <input type="BusinessName" class="form-control" id="BusinessName" aria-describedby="addressHelp" placeholder="Enter Business Name">
+              <small id="BusinessName" class="form-text text-muted">BusinessName</small>
             </div>
 
             <div class="form-group">
-              <label for="addressentry">Address</label>
-              <input type="address" class="form-control" id="addressentry" aria-describedby="addressHelp" placeholder="Enter address name">
-              <small id="addressHelp" class="form-text text-muted">Use the following syntax $SYNTAX NEED$</small>
+              <label for="IndustryCode">Industry Code</label>
+              <input type="IndustryCode" class="form-control" id="IndustryCode" aria-describedby="addressHelp" placeholder="Enter Industry Code">
+              <small id="IndustryCode" class="form-text text-muted">IndustryCode</small>
             </div>
 
-
-          <div class="form-inline">
-            <label class = "label-input-xlargeinrow" for="employmentbandlabel">Employment Band</label>
-            <select class="input-xlargeinrow" id="employmentband" >
+            <label for="employmentbandlabel">Employment Band</label>
+            <select id="employmentband" class="input-xlarge" >
               <option></option>
               <option>A</option>
               <option>B</option>
@@ -103,8 +101,8 @@
               <option>O</option>
             </select>
 
-            <label class = "label-input-xlargeinrow" for="legalStatuslabel">Legal Status</label>
-            <select class = "input-xlargeinrow" id="legalStatus">
+            <label for="legalStatuslabel">Legal Status</label>
+            <select class="input-xlarge" id="legalStatus">
               <option></option>
               <option>1</option>
               <option>2</option>
@@ -115,32 +113,9 @@
               <option>7</option>
               <option>8</option>
             </select>
-          </div>
 
-            <div class="form-inline">
-              <label class = "label-input-xlargeinrow" for="tradingstatuslabel">Trading Status</label>
-              <select class="input-xlargeinrow" id="tradingstatus">
-                <option></option>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-                <option>E</option>
-                <option>F</option>
-                <option>G</option>
-                <option>H</option>
-                <option>I</option>
-                <option>J</option>
-                <option>K</option>
-                <option>L</option>
-                <option>M</option>
-                <option>N</option>
-                <option>O</option>
-              </select>
-
-
-            <label class = "label-input-xlargeinrow" for="turnoverlabel">Turnover</label>
-            <select class="input-xlargeinrow" id="turnover">
+            <label for="turnoverlabel">Turnover</label>
+            <select class="input-xlarge" id="turnover">
               <option></option>
               <option>A</option>
               <option>B</option>
@@ -151,22 +126,31 @@
               <option>G</option>
               <option>H</option>
               <option>I</option>
-              <option>J</option>
-              <option>K</option>
-              <option>L</option>
-              <option>M</option>
-              <option>N</option>
-              <option>O</option>
             </select>
 
-          </div>
+              <label for="tradingstatuslabel">Trading Status</label>
+              <select class="input-xlarge" id="tradingstatus">
+                <option></option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+                <option>F</option>
+                <option>G</option>
+                <option>H</option>
+                <option>I</option>
+              </select>
+
+            </div>
+
             <div>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="button" class="btn btn-primary" onclick="range_query();">Search</button>
               <button type="reset" class="btn btn-secondary">Clear</button>
             </div>
           </form>
 
-          <h2 class="sub-header">Results</h2>
+          <!-- <h2 class="sub-header">Results</h2>
           <div class="row">
             <div class="col-sm-offset-5 col-sm-3 text-center">
                 <div class="btn-group" data-toggle="buttons">
@@ -175,145 +159,23 @@
                     <label class="btn btn-default btn-default center-block"><input type="radio">Raw Json??</label>
                 </div>
             </div>
+          </div> -->
+
+          <h2 class="sub-header">Results</h2>
+          <div class="row">
+            <div class="col-sm-offset-5 col-sm-3 text-center">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default btn-default active center-block"><input type="radio" value="1" id="radio1" name="radio-group" checked>Table</label>
+                    <label class="btn btn-default btn-default center-block"><input type="radio" value="2" id="radio2" name="radio-group">List</label>
+                    <label class="btn btn-default btn-default center-block"><input type="radio" value="3" id="radio3" name="radio-group">Raw Json</label>
+                </div>
+            </div>
           </div>
 
+          <!-- <div class="query" id="query"></div> -->
 
-        </div>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>VAT No.</th>
-                  <th>Address</th>
-                  <th>Date Established<th>
-                  <th>Number of Employees</th>
-                  <th>Revenue<th>
-                  <th>Legal Status</th>
-                  <th>Trading Status</th>
-                  <th>UPRN<th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+          <div class="results" id="prod"></div>
 
-
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
