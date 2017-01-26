@@ -180,6 +180,7 @@ function send_request(query){
 
   results_format(jsonResponse,xml,search_query)
 
+  // Below is for finding out the size of a response:
   // var xhr = new XMLHttpRequest();
   // xhr.open('GET','http://localhost:9000/v1/search?query=UPRN:734090080368',true);
   //
