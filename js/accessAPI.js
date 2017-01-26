@@ -2,102 +2,105 @@ function results_format(jsonResponse,xml,search_query){
   var table_checked = document.getElementById("radio1").checked;
   var list_checked = document.getElementById("radio2").checked;
   var json_checked = document.getElementById("radio3").checked;
+  if (jsonResponse["status"]!== 500){
+    if (table_checked){
+      var arr = [];
+      for(var x in jsonResponse){
+        arr.push(jsonResponse[x]);
+      }
 
-  if (table_checked){
-    var arr = [];
-    for(var x in jsonResponse){
-      arr.push(jsonResponse[x]);
+      // Need to show table div
+      var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
+
+      var headers = "<th>ID</th>\
+              <th>Business Name</th>\
+              <th>UPRN</th>\
+              <th>Industry Code</th>\
+              <th>Legal Status</th>\
+              <th>Trading Status</th>\
+              <th>Turnover</th>\
+              <th>Employment Bands</th>\
+            </tr>\
+          </thead>\
+          <tbody>";
+
+      var end = "</tbody></table></div>";
+
+      var to_add = ""
+      for (i = 0; i < arr.length; i++) {
+        business_div = "<tr>" +
+               "<td>" + arr[i].id + "</td>" +
+               "<td>" + arr[i].businessName + "</td>" +
+               "<td>" + arr[i].uprn + "</td>" +
+               "<td>" + arr[i].industryCode + "</td>" +
+               "<td>" + arr[i].legalStatus + "</td>" +
+               "<td>" + arr[i].tradingStatus + "</td>" +
+               "<td>" + arr[i].turnover + "</td>" +
+               "<td>" + arr[i].employmentBands + "</td>" +
+               "</tr>";
+        to_add += business_div
+      }
+      var new_div = start + headers + to_add + end;
     }
 
-    // Need to show table div
-    var start = "<div class='table-responsive'><table class='table table-striped'><thead><tr>";
-
-    var headers = "<th>ID</th>\
-            <th>Business Name</th>\
-            <th>UPRN</th>\
-            <th>Industry Code</th>\
-            <th>Legal Status</th>\
-            <th>Trading Status</th>\
-            <th>Turnover</th>\
-            <th>Employment Bands</th>\
-          </tr>\
-        </thead>\
-        <tbody>";
-
-    var end = "</tbody></table></div>";
-
-    var to_add = ""
-    for (i = 0; i < arr.length; i++) {
-      business_div = "<tr>" +
-             "<td>" + arr[i].id + "</td>" +
-             "<td>" + arr[i].businessName + "</td>" +
-             "<td>" + arr[i].uprn + "</td>" +
-             "<td>" + arr[i].industryCode + "</td>" +
-             "<td>" + arr[i].legalStatus + "</td>" +
-             "<td>" + arr[i].tradingStatus + "</td>" +
-             "<td>" + arr[i].turnover + "</td>" +
-             "<td>" + arr[i].employmentBands + "</td>" +
-             "</tr>";
-      to_add += business_div
+    if (list_checked){
+      var arr = [];
+      for(var x in jsonResponse){
+        arr.push(jsonResponse[x]);
+      }
+      var to_add = ""
+      for (i = 0; i < arr.length; i++) {
+        business_div = "<div>" +
+      				 "<h3>" + arr[i].businessName + "</h3>" +
+      				 "<p>" + "ID: " + arr[i].id + "</p>" +
+      				 "<p>" + "UPRN: " + arr[i].industryCode +"</p>" +
+               "<p>" + "Legal Status: " + arr[i].legalStatus +"</p>" +
+               "<p>" + "Trading Status: " + arr[i].tradingStatus +"</p>" +
+               "<p>" + "Turnover: " + arr[i].turnover +"</p>" +
+               "<p>" + "Employment Bands: " + arr[i].employmentBands +"</p>" +
+      				 "<br>" +
+      				 "</div>";
+        to_add += business_div
+      }
+      var new_div = to_add
     }
-    var new_div = start + headers + to_add + end;
+
+    if (json_checked){
+      // http://jsfiddle.net/f24UP/2/
+      // source: http://stackoverflow.com/questions/14195530/how-to-display-raw-json-data-on-a-html-page
+
+      var jsonVar = {
+         jsonResponse
+      },
+      jsonStr = JSON.stringify(jsonVar),
+      regeStr = '',
+      f = {
+              brace: 0
+          }; // for tracking matches, in particular the curly braces
+
+      document.getElementById('prod').innerHTML = jsonStr;
+
+      regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
+          var rtnFn = function() {
+                  return '<div style="text-indent: ' + (f['brace'] * 20) + 'px;">' + p1 + '</div>';
+              },
+              rtnStr = 0;
+          if (p1.lastIndexOf('{') === (p1.length - 1)) {
+              rtnStr = rtnFn();
+              f['brace'] += 1;
+          } else if (p1.indexOf('}') === 0) {
+              f['brace'] -= 1;
+              rtnStr = rtnFn();
+          } else {
+              rtnStr = rtnFn();
+          }
+          return rtnStr;
+      });
+      new_div = regeStr;
+    }
   }
-
-  if (list_checked){
-    var arr = [];
-    for(var x in jsonResponse){
-      arr.push(jsonResponse[x]);
-    }
-    var to_add = ""
-    for (i = 0; i < arr.length; i++) {
-      business_div = "<div>" +
-    				 "<h3>" + arr[i].businessName + "</h3>" +
-    				 "<p>" + "ID: " + arr[i].id + "</p>" +
-    				 "<p>" + "UPRN: " + arr[i].industryCode +"</p>" +
-             "<p>" + "Legal Status: " + arr[i].legalStatus +"</p>" +
-             "<p>" + "Trading Status: " + arr[i].tradingStatus +"</p>" +
-             "<p>" + "Turnover: " + arr[i].turnover +"</p>" +
-             "<p>" + "Employment Bands: " + arr[i].employmentBands +"</p>" +
-    				 "<br>" +
-    				 "</div>";
-      to_add += business_div
-    }
-    var new_div = to_add
-  }
-
-  if (json_checked){
-    // http://jsfiddle.net/f24UP/2/
-    // source: http://stackoverflow.com/questions/14195530/how-to-display-raw-json-data-on-a-html-page
-
-    var jsonVar = {
-       jsonResponse
-    },
-    jsonStr = JSON.stringify(jsonVar),
-    regeStr = '',
-    f = {
-            brace: 0
-        }; // for tracking matches, in particular the curly braces
-
-    document.getElementById('prod').innerHTML = jsonStr;
-
-    regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
-        var rtnFn = function() {
-                return '<div style="text-indent: ' + (f['brace'] * 20) + 'px;">' + p1 + '</div>';
-            },
-            rtnStr = 0;
-        if (p1.lastIndexOf('{') === (p1.length - 1)) {
-            rtnStr = rtnFn();
-            f['brace'] += 1;
-        } else if (p1.indexOf('}') === 0) {
-            f['brace'] -= 1;
-            rtnStr = rtnFn();
-        } else {
-            rtnStr = rtnFn();
-        }
-        return rtnStr;
-    });
-    new_div = regeStr;
-
+  else {
+    new_div =  "<h2>No Results Found</h2><p>Please try another input.</p>"
   }
   // Replace the divs with the query results and the actual query
   document.getElementById('prod').innerHTML =  new_div;
