@@ -76,12 +76,15 @@
             </div>
 
             <div>
-              <button type="button" class="btn btn-primary" onclick="ubrn_lookup();">Search</button>
+              <button type="button" class="btn btn-primary" onclick="ubrn_lookup();">Submit</button>
               <button type="reset" class="btn btn-secondary">Clear</button>
             </div>
           </form>
 
-          <!-- <h2 class="sub-header">Results</h2> -->
+          <h2 class="sub-header">Query</h2>
+
+          <div class="query" id="query">No query has been submitted.</div>
+
           <div class="row">
             <div class="col-sm-offset-5 col-sm-3 text-center">
                 <div class="btn-group" data-toggle="buttons">
@@ -91,10 +94,9 @@
                 </div>
             </div>
           </div>
+          <!-- <div class="query" id="query"></div> -->
 
-
-
-          <div class="products" id="prod"></div>
+          <div class="results" id="prod"></div>
 
       </div>
     </div>
