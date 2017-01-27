@@ -1,4 +1,7 @@
 # DemoUI
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/69a249ea5f8b47ecbeeb22c743f201c6)](https://www.codacy.com/app/ONSDigital/business-index-ui_2?utm_source=github.com&utm_medium=referral&utm_content=awharris/business-index-ui&utm_campaign=badger)
+
 For BI project
 
 ## Environment setup:
