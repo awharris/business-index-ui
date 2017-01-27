@@ -24,7 +24,7 @@
 
   <body>
     <div class="container">
-        
+
         <header role="banner" id="global-header" class="">
             <div class="header-wrapper">
                 <div class="header-global">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </header>
-        
+
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -83,11 +83,6 @@
         <div class="btn-group">
 
           <div class="form-group">
-            <label for="BusinessName">Business Name</label>
-            <input type="BusinessName" class="form-control" id="BusinessName" aria-describedby="addressHelp" placeholder="Enter Business Name">
-          </div>
-
-          <div class="form-group">
             <label for="IndustryCode">Industry Code Min Range</label>
             <input type="IndustryCode" class="form-control" id="IndustryCode" aria-describedby="addressHelp" placeholder="Enter Industry Code">
           </div>
@@ -97,8 +92,28 @@
             <input type="IndustryCode" class="form-control" id="IndustryCode2" aria-describedby="addressHelp" placeholder="Enter Industry Code">
           </div>
 
-          <label for="employmentbandlabel">Employment Band</label>
+          <label for="employmentbandlabel">Employment Band Min Range</label>
           <select id="employmentband" class="input-xlarge" >
+            <option></option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+          </select>
+
+          <label for="employmentbandlabel">Employment Band Max Range</label>
+          <select id="employmentband2" class="input-xlarge" >
             <option></option>
             <option>A</option>
             <option>B</option>
@@ -143,8 +158,22 @@
             <option>8</option>
           </select>
 
-          <label for="turnoverlabel">Turnover</label>
+          <label for="turnoverlabel">Turnover Min Range</label>
           <select class="input-xlarge" id="turnover">
+            <option></option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+          </select>
+
+          <label for="turnoverlabel">Turnover Max Range</label>
+          <select class="input-xlarge" id="turnover2">
             <option></option>
             <option>A</option>
             <option>B</option>

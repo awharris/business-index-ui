@@ -20,7 +20,7 @@ function results_format(jsonResponse,xml,search_query){
               <th>Legal Status</th>\
               <th>Trading Status</th>\
               <th>Turnover</th>\
-              <th>Employment Bands</th>\
+              <th>Employment</th>\
             </tr>\
           </thead>\
           <tbody>";
@@ -132,16 +132,17 @@ function syntaxHighlight(json) {
 }
 
 function range_query(){
-  var business_name = document.getElementById('BusinessName').value.toString();
   var industry_code = document.getElementById('IndustryCode').value.toString();
   var industry_code2 = document.getElementById('IndustryCode2').value.toString();
   var employment_band = document.getElementById('employmentband').value.toString();
+  var employment_band2 = document.getElementById('employmentband2').value.toString();
   var legal_status = document.getElementById('legalStatus').value.toString();
   var legal_status2 = document.getElementById('legalStatus2').value.toString();
   var turnover = document.getElementById('turnover').value.toString();
+  var turnover2 = document.getElementById('turnover2').value.toString();
   var trading_status = document.getElementById('tradingstatus').value.toString();
   var arr = [];
-  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
+  var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["IndustryCode:",industry_code]];
     for(var x in values){
       if (values[x][1] != ""){
         if (values[x][0] == "LegalStatus:" && legal_status2!=""){
@@ -149,6 +150,12 @@ function range_query(){
         }
         if (values[x][0] == "IndustryCode:" && industry_code2!=""){
           values[x][1] = "["+industry_code+" TO "+industry_code2+"]";
+        }
+        if (values[x][0] == "Turnover:" && turnover2!=""){
+          values[x][1] = "["+turnover+" TO "+turnover2+"]";
+        }
+        if (values[x][0] == "EmploymentBands:" && employment_band2!=""){
+          values[x][1] = "["+employment_band+" TO "+employment_band2+"]";
         }
       arr.push(values[x][0]);
       arr.push(values[x][1]);
