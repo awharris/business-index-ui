@@ -15,7 +15,7 @@ function results_format(jsonResponse,xml,search_query){
 
       var headers = "<th>ID</th>\
               <th>Business Name</th>\
-              <th>UPRN</th>\
+              <th>UBRN</th>\
               <th>Industry Code</th>\
               <th>Legal Status</th>\
               <th>Trading Status</th>\
