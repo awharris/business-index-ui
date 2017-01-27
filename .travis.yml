@@ -1,3 +1,7 @@
 language: node_js
 node_js:
   - "6"
+script:
+  # `test` target executes `bundle exec rspec spec` and `npm run test`
+  # in all appropriate subdirectories
+  - make test
