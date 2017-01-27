@@ -3,7 +3,7 @@ function results_format(jsonResponse,xml,search_query){
   var list_checked = document.getElementById("radio2").checked;
   var json_checked = document.getElementById("radio3").checked;
 
-  if (jsonResponse["status"]!== 500){
+  if (jsonResponse["status" <error test> !== 500){
     if (table_checked){
       var arr = [];
       for(var x in jsonResponse){
