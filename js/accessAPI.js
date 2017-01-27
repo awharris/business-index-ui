@@ -143,13 +143,13 @@ function range_query(){
   var arr = [];
   var values = [["EmploymentBands:",employment_band],["LegalStatus:",legal_status],["Turnover:",turnover],["TradingStatus:",trading_status],["BusinessName:",business_name],["IndustryCode:",industry_code]];
     for(var x in values){
-    if (values[x][1] != "" | " TO ]"){
-      if (values[x][0] == "LegalStatus:"){
-        values[x][1] = "["+legal_status+" TO "+legal_status2+"]";
-      }
-      if (values[x][0] == "IndustryCode:"){
-        values[x][1] = "["+industry_code+" TO "+industry_code2+"]";
-      }
+      if (values[x][1] != ""){
+        if (values[x][0] == "LegalStatus:" && legal_status2!=""){
+          values[x][1] = "["+legal_status+" TO "+legal_status2+"]";
+        }
+        if (values[x][0] == "IndustryCode:" && industry_code2!=""){
+          values[x][1] = "["+industry_code+" TO "+industry_code2+"]";
+        }
       arr.push(values[x][0]);
       arr.push(values[x][1]);
       arr.push(" AND ");
